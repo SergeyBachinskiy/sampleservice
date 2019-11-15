@@ -10,6 +10,7 @@ WORKDIR /app
 #RUN npm install && npm prune --production
 #COPY --chown=web:web . .
 RUN ls -la
+RUN ls -la ../
 RUN go install
 USER root
 
