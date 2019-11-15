@@ -8,7 +8,8 @@ WORKDIR /app
 #COPY --chown=web:web package.json .
 #COPY --chown=web:web package-lock.json .
 #RUN npm install && npm prune --production
-#COPY --chown=web:web . .
+COPY --chown=web:web . .
+RUN pwd
 RUN ls -la
 RUN ls -la ../
 RUN go install
