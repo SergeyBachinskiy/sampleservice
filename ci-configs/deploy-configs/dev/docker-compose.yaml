@@ -1,0 +1,33 @@
+---
+
+docker_compose_deploy:
+  project_name: zypmedia
+  recreate: smart
+  definition:
+    version: "2.2"
+
+    networks:
+      zypmedia:
+        driver: bridge
+
+    services:
+      simpleservice:
+        restart: "always"
+        image: "{{ docker_image }}"
+        hostname: "{{ inventory_hostname }}"
+        logging: "{{ docker_logging }}"
+        environment:
+          # Deployment metadata
+          HOST_IP: "{{ instance_ip }}"
+          DOCKER_IMAGE: "{{ docker_image }}"
+          GIT_REVISION: "{{ git_code_revision | default('unknown') }}"
+          JENKINS_BUILD_URL: "{{ jenkins_build_url | default('unknown') }}"
+          JENKINS_BUILD_USER: "{{ jenkins_build_user | default('unknown') }}"
+          DEVOPS_GIT_REVISION: "{{ git_devops_revision | default('unknown') }}"
+        command: "app"
+        ports:
+          - 80:8080
+        networks:
+          zypmedia:
+            aliases:
+              - "{{ inventory_hostname }}"
