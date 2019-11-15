@@ -1,18 +1,9 @@
 FROM golang:1.13-stretch
 
-RUN groupadd web && useradd -g web web && mkdir /app
-RUN addgroup web -g 102 && adduser -S -D -u 102 web web && mkdir app
+WORKDIR /go/src/app
+COPY . .
 
-WORKDIR /app
+RUN go get -d -v ./...
+RUN go install -v ./...
 
-#COPY --chown=web:web package.json .
-#COPY --chown=web:web package-lock.json .
-#RUN npm install && npm prune --production
-COPY --chown=web:web . .
-RUN pwd
-RUN ls -la
-RUN ls -la ../
-RUN go install
-USER web
-
-CMD ["goserv"]
+CMD ["app"]
