@@ -1,7 +1,7 @@
 FROM golang:1.13-stretch
 
-#RUN groupadd web && useradd -g web web && mkdir /app
-#RUN addgroup web -g 102 && adduser -S -D -u 102 web web && mkdir app
+RUN groupadd web && useradd -g web web && mkdir /app
+RUN addgroup web -g 102 && adduser -S -D -u 102 web web && mkdir app
 
 WORKDIR /app
 
@@ -13,6 +13,6 @@ RUN pwd
 RUN ls -la
 RUN ls -la ../
 RUN go install
-USER root
+USER web
 
 CMD ["goserv"]
