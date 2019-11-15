@@ -9,6 +9,7 @@ WORKDIR /app
 #COPY --chown=web:web package-lock.json .
 #RUN npm install && npm prune --production
 #COPY --chown=web:web . .
+RUN ls -la
 RUN go install
 USER root
 
