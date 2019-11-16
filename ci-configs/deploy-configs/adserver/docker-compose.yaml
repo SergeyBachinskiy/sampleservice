@@ -17,7 +17,6 @@ docker_compose_deploy:
         hostname: "{{ inventory_hostname }}"
         environment:
           # Deployment metadata
-          HOST_IP: "{{ instance_ip }}"
           DOCKER_IMAGE: "{{ docker_image }}"
           GIT_REVISION: "{{ git_code_revision | default('unknown') }}"
           JENKINS_BUILD_URL: "{{ jenkins_build_url | default('unknown') }}"
