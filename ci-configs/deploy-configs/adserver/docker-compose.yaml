@@ -1,4 +1,6 @@
 ---
+docker_instances_are_run:
+  "{{ docker_compose_deploy | docker_instances_state }}"
 
 docker_compose_deploy:
   project_name: zypmedia
