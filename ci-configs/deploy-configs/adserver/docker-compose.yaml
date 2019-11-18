@@ -17,6 +17,7 @@ docker_compose_deploy:
         restart: "always"
         image: "{{ docker_image }}"
         hostname: "{{ inventory_hostname }}"
+        logging: "{{ docker_logging }}"
         environment:
           # Deployment metadata
           HOST_IP: "{{ instance_ip }}"
